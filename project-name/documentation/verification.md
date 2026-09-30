@@ -18,4 +18,8 @@ Screenshots: [desktop](screenshot01.png), [mobile](mobile.png), [boss](boss.png)
 
 ## Public frontend
 
-Pending frontend release/deployment and two-browser verification of the public URL. No claim of completed public delivery is made until this section records the released version, workflow and public browser result.
+Frontend [v0.0.3](https://github.com/SamuelAsherRivello/babylon-lite-enter-the-gungeon-clone/releases/tag/v0.0.3), commit `efc7102c1b5faa758424663d9e5157f54d01c069`, contains the tested implementation (`e7de8af`). [Release workflow 36727262087](https://github.com/SamuelAsherRivello/babylon-lite-enter-the-gungeon-clone/actions/runs/36727262087) and [Pages deployment 36727501148](https://github.com/SamuelAsherRivello/babylon-lite-enter-the-gungeon-clone/actions/runs/36727501148) both succeeded.
+
+The [public game](https://samuelasherrivello.github.io/babylon-lite-enter-the-gungeon-clone/) and its version.txt return HTTP 200, with version 0.0.3. `GAME_URL` was set to the public URL and all 3 browser tests passed in 34 seconds: actual two-client synchronized combat/hot join/drop/reconnect/pause/roll, concurrent mobile touch input, and team defeat/leader restart/fresh replay. Both clients used the deployed authoritative backend. Public screenshots refreshed the README's canonical desktop image, mobile image and defeat image. No page errors were observed.
+
+OpenSpec changes: frontend `add-gungeon-client` and server `add-gungeon-coop`; maintained specifications are synced before archiving. The frontend archive records completed delivery tasks and this evidence.

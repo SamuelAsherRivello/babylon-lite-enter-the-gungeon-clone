@@ -1,3 +1,8 @@
+# Spec Delta
+
+## Purpose
+Provide a complete original landscape cooperative dungeon frontend, robust controls and lifecycle states, and verified public multiplayer delivery.
+
 ## ADDED Requirements
 ### Requirement: Landscape cooperative play
 The game SHALL present original top-down pixel artwork in a landscape arena and support 1–4 players creating/joining coded rooms, readiness and hot join/drop/reconnect.
