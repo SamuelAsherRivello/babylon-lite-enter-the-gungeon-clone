@@ -1,127 +1,118 @@
-<!-- AI: Keep commands rooted at the repository. The Vite application, source, tests, and build output belong in project-name/. -->
 ![Samuel Asher Rivello](project-name/documentation/samuel-asher-rivello-banner.png)
 
-# {project-name}
+# Enter the Gungeon Clone
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
-
-<!-- AI: Update this project summary when the template is used. -->
-This is the project repo....
-
-## Images
-
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
-
-### Screenshots
-
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
-
-<a href="project-name/documentation/screenshot01.png"><img src="project-name/documentation/screenshot01.png" width="400" alt="Screenshot placeholder" /></a>
+**Brass & Brimstone** is an original landscape pixel dungeon for **1–4 online cooperative players**. Play solo or invite a crew by room code. Dodge bright bullet patterns, clear waves, pick weapon upgrades and revive fallen teammates. A clockwork Warden arrives every fifth wave; the run ends when the entire crew is down.
 
 ## Live Demo
 
-<!-- AI: Keep exactly one bullet containing the demo link and no other visible text. Do not mention releases or add other text here. Keep this one link updated to the latest release URL. -->
+[**Play Enter the Gungeon Clone →**](https://samuelasherrivello.github.io/babylon-lite-enter-the-gungeon-clone/)
 
-- [{live-demo-url}](https://samuelasherrivello.github.io/github-repository-template/)
+![Two players in the Copper Keep](project-name/documentation/screenshot01.png)
 
-## Table of Contents
+## Play
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
+Create a private room and share its six-character code or invite link. Choose a pulse pistol, scatter gun or burst carbine, then ready up. Everyone currently in the lobby must be ready; a solo player can start immediately. Friends can hot join or leave during a run. Enemy counts and difficulty scale with the connected crew.
 
-<!-- AI: Do not include anything above the Table of Contents within the Table of Contents. -->
-1. [Getting Started](#getting-started)
-2. [Project Details](#project-details)
-3. [Credits](#credits)
+| Control | Action |
+|---|---|
+| WASD / arrow keys | Move |
+| Mouse | Aim |
+| Left click, hold | Shoot |
+| Space | Dodge roll; brief invulnerability and 1.4-second cooldown |
+| 1 / 2 / 3 in lobby | Choose starting weapon |
+| P / Escape | Local pause or resume |
+| Touch | Independent movement and aim/fire sticks; roll button |
 
-## Getting Started
+Stay near a downed ally for two seconds to revive them. Friendly fire is disabled. Green loot heals the active crew; each cleared wave grants every player an upgrade choice. Choose damage, firing speed, vitality/healing or movement speed during the ten-second break. The lowest connected player number can restart after defeat.
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
+Friendly shots are cyan streaks; enemy bullets are pink circles. Your health, teammate status, current wave, remaining enemies and roll cooldown remain visible. Cover blocks bullets; wooden crates break under fire. Local pause stops only your input: the shared dungeon keeps running, and enemies can still hit you.
 
-<!-- AI: Update this getting-started summary when the template is used. -->
-This is the getting started...
+## Run locally
 
-### 🛠 Build Project
+Use Node 24 and npm from the repository root. Current Chrome or Edge with WebGPU and hardware acceleration is required. The game shows a recovery message when graphics initialization fails.
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
+```sh
+npm ci
+npm test
+npm run build
+npm run dev
+```
 
-1. From the repository root, run `npm install`.
-2. Run `npm run build`.
+Open the URL printed by Vite, ending in `/babylon-lite-enter-the-gungeon-clone/`. By default this local frontend joins the public backend. For an independent local server, run the [shared server](https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server) and set `VITE_SERVER_URL=http://127.0.0.1:2567` in an untracked `.env` file; `.env.example` documents the public setting.
 
-### 🛠 Run Project
+Browser verification uses installed Microsoft Edge and two separate browser contexts:
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
+```sh
+npm run test:browser
+```
 
-1. From the repository root, run `npm run dev` and open the localhost URL Vite prints.
-2. Run `npm test` to execute the focused source checks.
+For the longer two-browser playthrough through upgrades and defeating the fifth-wave boss, run `npm run test:run`. It drives normal keyboard/mouse controls and reads snapshots; it does not alter game rules or grant health.
 
-### 🛠 Release Version
+See [verification evidence](project-name/documentation/verification.md) for the exact tested scope and physical-device limits.
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
+## Multiplayer and hosting
 
-1. Run `npm test` and `npm run build` from the repository root.
-2. Push to `main` to deploy through the GitHub Pages workflow.
-3. Run the **Release** workflow from GitHub Actions to bump the patch version, tag it, and create the GitHub release.
+The [Colyseus backend v0.7.0](https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server/releases/tag/v0.7.0) is authoritative for validated movement, shooting, roll, enemy AI, spawning, damage, loot, revive, upgrades, waves and replay. The exact shared-client release tarball is pinned in the lockfile. Browser clients interpolate visual movement and send bounded inputs; they never decide health, positions or damage.
 
-## Project Details
+Rooms have four seats. A fifth player sees a full-room message and can retry. Disconnect removes that participant; automatic retry joins the same code with a fresh identity and starting gear while the room survives. Last departure disposes the room. Expired codes offer creation of a new room.
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
+The existing Vercel service keeps rooms in memory and has approximately five-minute sessions. Hosting interruptions and deployments can reset runs, and independent backend instances do not guarantee shared memory. There are no persistent accounts or saved progress. GitHub Pages serves the static frontend; it does not run the multiplayer server.
 
-<!-- AI: Update these project details when the template is used. -->
-This is the project details...
+## Project and releases
 
-### 📝 Structure
+Source, original procedural sprites, sounds and tests live in `project-name/`; root package files manage Vite and the release. Babylon Lite renders the pixel surface through its orthographic WebGPU sprite pipeline. [Asset provenance and source revisions](project-name/documentation/provenance.md) record the template, library, backend and original art.
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
+`version.txt` is the frontend version source. The checked-in **Release** workflow installs, tests and builds, then increments the patch version, commits, tags and publishes a GitHub Release. Explicitly dispatch **Deploy live demo** afterward because a workflow bot's push does not trigger another push workflow. Verify the public version, assets and two-client gameplay before announcing delivery.
 
-- `project-name/index.html` provides the plain safe-area HTML shell.
-- `project-name/test/` contains focused automated checks for the starter.
-- `project-name/documentation/` contains canonical README images and project
-  documentation assets.
+## Original AI Prompt
 
-### 📦 AI
+<details>
+<summary>Read the original game request and follow-up requirements</summary>
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
+```text
+$ai-skills-create-game
 
-- `AGENTS.md` contains repository-specific AI agent guidance.
-- `AGENTS_TEMPLATE_USAGE_CHECKLIST.md` contains the template reuse checklist.
-- [openspec](openspec/) contains the repository's specification workflow
-  configuration.
+- Title: [Enter the Gungeon Clone]
+- Type: [Multiplayer, online cooperative, 2–4 players]
+- Camera: [Top-down orthographic 2D]
+- Core loop: [Team up in compact dungeon arenas, survive increasingly difficult enemy waves, dodge bullet patterns, collect loot, and choose weapon upgrades between waves. Defeat a boss every five waves. The run ends when the entire team is down.]
+- Controls: [WASD movement, mouse aiming, left-click shooting, and Space to dodge roll with a short cooldown and brief invulnerability.]
+- Cooperative mechanics:
+  - [Create or join a room using a shareable room code, then ready up together.]
+  - [Revive downed teammates, share upgrade rewards, and disable friendly fire.]
+  - [Scale enemy counts and difficulty with the number of active players.]
+- Look and feel:
+  - [Original pixel-art dungeon rooms with stone floors, destructible props, and readable cover.]
+  - [Distinct player colors, expressive enemies, bright projectiles, punchy muzzle flashes, and clear hit feedback.]
+  - [Keep enemy bullets visually distinct from friendly shots. Show player health, teammate status, current wave, remaining enemies, and dodge cooldown.]
+- Gameplay requirements:
+  - [Include three starting weapons with distinct firing patterns and meaningful upgrades.]
+  - [Include enemies that chase, fire aimed shots, and emit radial bullet patterns.]
+  - [Provide short breaks between waves for upgrades and a team restart option after defeat.]
+- Multiplayer server:
+  - [Use https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server or my writable fork: <fork URL, if applicable>.]
+  - [Automatically update the selected server repository with the room logic and synchronized state required by this game.]
+  - [Make the server authoritative for movement validation, combat, enemy spawning, damage, loot, revives, and wave progression.]
+  - [Use client interpolation for smooth remote movement and handle disconnects and reconnects gracefully.]
+  - [Verify cooperative gameplay with at least two browser clients.]
+- Inspiration links:
+  - [https://store.steampowered.com/app/311690/Enter_the_Gungeon/]
+- Inspiration screenshots: [Attach reference screenshots here.]
+- Originality requirement: [Keep the requested project title, but create original artwork, sounds, characters, weapons, UI, and room layouts; use the reference only for gameplay and visual inspiration.]
 
-### 📦 Packages
+Follow-ups:
+say '1-4' players so that it is playable alone too and has hot join hot drop
+ok now make the landscape aspect game
+iterate until its done and playaable via live demo on link on readme as a multiplayer game
+create the game. iterate until complete
+approved. deploy
+```
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
-
-- [Vite](https://vite.dev/) provides local development and production builds.
-
+</details>
 
 ## Credits
 
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
+Samuel Asher Rivello · Rivello Multimedia Consulting. [Portfolio](https://www.samuelasherrivello.com/) · [GitHub](https://github.com/SamuelAsherRivello)
 
-<!-- AI: Preserve established attribution and ownership. Customize the following subsections only from confirmed contributor, contact, and license information; do not infer a new owner from the repository name. -->
-### 💡 Contributors
-
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
-
-<!-- AI: Preserve existing contributor credit and add contributors only when confirmed. Do not automatically advance experience counts or their reference year. -->
-- Samuel Asher Rivello - Over 25 years of game development XP (2026)
-
-### 💡 Contact
-
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
-
-<!-- AI: Preserve confirmed contact destinations and their order unless requested otherwise. Use readable display URLs without a protocol or trailing slash while keeping the real link target intact. Do not invent accounts or change target capitalization based on display styling. -->
-- [LinkedIn.com/in/SamuelAsherRivello](https://Linkedin.com/in/SamuelAsherRivello) ⭐ 
-- [GitHub.com/SamuelAsherRivello](https://github.com/SamuelAsherRivello/)
-- [Twitter.com/srivello](https://twitter.com/srivello/)
-- Resume / Portfolio: [SamuelAsherRivello.com](http://www.SamuelAsherRivello.com)
-
-
-### 💡 License
-
-<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
-
-<!-- AI: Keep the license name linked to the actual relative license file and verify that its terms match this statement. Keep the copyright holder and year consistent with that file. Do not change license terms, ownership, or dates without an explicit request. -->
-- Provided as-is under the [MIT License](LICENSE).
-
-- Copyright © 2026 Rivello Multimedia Consulting, LLC.
+[Repository template](https://github.com/SamuelAsherRivello/github-repository-template) and [AI Skills Library](https://github.com/SamuelAsherRivello/ai-skills-library) provide the starting structure and workflows. [Enter the Gungeon](https://store.steampowered.com/app/311690/Enter_the_Gungeon/) supplies gameplay and visual inspiration; all game characters, art, sounds, weapons, UI and arena layout here are original. [Babylon Lite](https://github.com/BabylonJS/Babylon-Lite) is Apache-2.0 licensed. This project uses the repository's [MIT license](LICENSE).

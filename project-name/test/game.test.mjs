@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {normalized,makeInput,smoothPosition} from '../src/input.js';
+test('concurrent diagonal controls remain bounded and pause releases all actions',()=>{const keys=new Set(['w','d']);const i=makeInput(keys,{x:1,y:-1},{x:100,y:100},true,true);assert.ok(Math.hypot(i.x,i.y)<=1.00001);assert.ok(Math.hypot(i.ax,i.ay)<=1.00001);assert.deepEqual(makeInput(keys,{x:1,y:1},{x:1,y:0},true,true,true),{x:0,y:0,ax:1,ay:0,shoot:false,roll:false});assert.deepEqual(normalized(0,0),{x:0,y:0});});
+test('interpolation is frame-rate independent and teleports reset history',()=>{const a=smoothPosition({x:0,y:0},{x:1,y:0},1/30);let b={x:0,y:0};for(let i=0;i<2;i++)b=smoothPosition(b,{x:1,y:0},1/60);assert.ok(Math.abs(a.x-b.x)<1e-10);assert.deepEqual(smoothPosition(a,{x:20,y:10},1/60),{x:20,y:10});});

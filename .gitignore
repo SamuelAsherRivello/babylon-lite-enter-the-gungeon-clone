@@ -9,3 +9,10 @@ node_modules/
 .env.*
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
+.tmp/
+test-results/
+playwright-report/
+/.gungeon-*
+/.server-*
+/.integrate-server.py
+!/.env.example

@@ -1,12 +1,13 @@
 schema: spec-driven
 context: |
-  Repository: project-name.
-  This repository starts as a reusable template with no application
-  implementation, product decisions, or approved technology stack.
+  Repository: babylon-lite-enter-the-gungeon-clone.
+  Original landscape 1–4-player cooperative wave arena.
+  Babylon Lite/WebGPU renderer, plain JavaScript/Vite client, authoritative
+  Colyseus server and shared client pinned to release 0.7.0.
+  Browser never owns health, movement outcomes or combat; no credentials.
+  GitHub Pages static frontend; Vercel in-memory backend with session limits.
+  Verification: npm test, npm run build, npm run test:browser, public two-client play.
   Canonical project documentation assets live in project-name/documentation/.
-  Before proposing or applying a change, record the project's verified purpose,
-  runtime targets, architecture, dependency policy, security constraints, and
-  validation commands here.
 rules:
   proposal:
     - Mark unresolved decisions clearly; recommendations are not approvals.
