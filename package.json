@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test bomberman-clone/test/game.test.mjs bomberman-clone/test/private-room-links.test.mjs",
+    "test": "node --test bomberman-clone/test/game.test.mjs bomberman-clone/test/private-room-links.test.mjs bomberman-clone/test/room-code.test.mjs",
     "test:browser": "playwright test",
     "test:run": "node bomberman-clone/test/playthrough.mjs"
   },

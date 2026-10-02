@@ -1,11 +1,11 @@
 import {test,expect} from '@playwright/test';
 const url=process.env.GAME_URL||'http://127.0.0.1:5173/babylon-lite-enter-the-gungeon-clone/';
-const connected=p=>p.waitForFunction(()=>window.__gungeon?.state().status==='connected');
+const connected=async p=>{try{await p.waitForFunction(()=>['connected','error','full'].includes(window.__gungeon?.state().status),null,{timeout:30000});}catch{const state=await p.evaluate(()=>window.__gungeon?.state());throw new Error(`Room connection timed out in ${state?.status}: ${state?.error||'no server error reported'}`);}const state=await p.evaluate(()=>window.__gungeon.state());if(state.status!=='connected')throw new Error(`Room connection ended as ${state.status}: ${state.error}`);};
 async function create(p){await p.goto(url);await p.waitForFunction(()=>window.__gungeon?.ready());await p.locator('#create').click();await connected(p);return p.evaluate(()=>window.__gungeon.state().code);}
 async function me(p){return p.evaluate(()=>{const s=window.__gungeon.state();return s.gameState.players.find(p=>p.id===s.sessionId);});}
 test('two clients share combat, hot joins/drops, short roll, local pause and fresh reconnect',async({browser})=>{
  const contexts=await Promise.all([0,1,2].map(()=>browser.newContext({viewport:{width:1440,height:1050}})));const [a,b,c]=await Promise.all(contexts.map(c=>c.newPage()));const errors=[];for(const p of [a,b,c])p.on('pageerror',e=>errors.push(e.message));
- try{const code=await create(a);await b.goto(url+'?room='+code);await connected(b);await a.locator('[data-weapon=carbine]').click();await b.locator('[data-weapon=scatter]').click();await a.locator('#ready').click();await b.locator('#ready').click();await a.waitForFunction(()=>window.__gungeon.state().gameState.phase==='combat');
+ try{const code=await create(a);await b.goto(url+'?room='+code.toLowerCase());await connected(b);await a.locator('[data-weapon=carbine]').click();await b.locator('[data-weapon=scatter]').click();await a.locator('#ready').click();await b.locator('#ready').click();await a.waitForFunction(()=>window.__gungeon.state().gameState.phase==='combat');
   const p=await me(a);await a.keyboard.down('d');await a.waitForTimeout(250);await a.keyboard.up('d');await expect.poll(async()=>{const s=await b.evaluate(()=>window.__gungeon.state());return s.gameState.players.find(q=>q.id===p.id).x;}).toBeGreaterThan(p.x+.3);
   await a.keyboard.press('Space');await expect.poll(async()=>(await me(a)).rollCooldown).toBeGreaterThan(.5);
   const r=await a.locator('#game').boundingBox();await a.mouse.move(r.x+r.width*.1,r.y+r.height*.3);await a.mouse.down();await a.waitForFunction(()=>{const s=window.__gungeon.state();return s.gameState.shots.some(q=>q.owner===s.sessionId);});await a.mouse.up();
@@ -15,6 +15,23 @@ test('two clients share combat, hot joins/drops, short roll, local pause and fre
   await a.locator('#sound').click();await expect(a.locator('#sound')).toHaveAttribute('aria-pressed','true');await a.locator('#sound').click();await a.screenshot({path:'bomberman-clone/documentation/screenshot01.png',fullPage:true});expect(errors).toEqual([]);
   const dims=await a.evaluate(()=>({height:document.documentElement.scrollHeight,view:innerHeight}));expect(dims.height).toBeLessThanOrEqual(dims.view+2);
  }finally{await Promise.all(contexts.map(c=>c.close()));}
+});
+test('invalid invite links show admission feedback and invalid manual codes do not connect',async({browser})=>{
+ const context=await browser.newContext({viewport:{width:1440,height:1000}});const p=await context.newPage(),attempts=[];await p.route('**/api/join/gungeon',async route=>{attempts.push(JSON.parse(route.request().postData()||'{}'));await route.fulfill({status:404,contentType:'application/json',body:JSON.stringify({error:'Room not found'})});});
+ try{await p.goto(url+'?room=ABC123');await p.waitForFunction(()=>window.__gungeon?.ready());await expect(p.locator('#overlay-title')).toHaveText('Invalid invite link');await expect(p.locator('#overlay-text')).toContainText('four-character');await expect(p.locator('#admission')).toBeVisible();expect(await p.evaluate(()=>window.__gungeon.state().status)).toBe('idle');expect(attempts).toHaveLength(0);
+  const input=p.locator('#join-code');await input.fill('a!12');await expect(input).toHaveValue('A!12');await p.locator('#join').click();await expect(p.locator('#room-code-error')).toContainText('four-character letter-and-number code');expect(await p.evaluate(()=>window.__gungeon.state().status)).toBe('idle');expect(attempts).toHaveLength(0);
+  await input.fill('ab12');await p.locator('#join').click();await expect.poll(()=>attempts.length).toBe(1);expect(attempts[0]).toEqual({code:'AB12'});
+ }finally{await context.close();}
+});
+test('valid lowercase invite links auto-join using uppercase four-character codes',async({browser})=>{
+ const context=await browser.newContext({viewport:{width:1440,height:1000}});const p=await context.newPage(),attempts=[];await p.route('**/api/join/gungeon',async route=>{attempts.push(JSON.parse(route.request().postData()||'{}'));await route.fulfill({status:404,contentType:'application/json',body:JSON.stringify({error:'Room not found'})});});
+ try{await p.goto(url+'?room=ab9z');await p.waitForFunction(()=>window.__gungeon?.ready());await expect.poll(()=>attempts.length).toBe(1);expect(attempts[0]).toEqual({code:'AB9Z'});await expect(p.locator('#overlay-title')).toHaveText('That vault has closed');
+ }finally{await context.close();}
+});
+test('blank create requests a generated room',async({browser})=>{
+ const context=await browser.newContext({viewport:{width:1440,height:1000}});const p=await context.newPage(),attempts=[];await p.route('**/api/join/gungeon',async route=>{attempts.push(JSON.parse(route.request().postData()||'{}'));await route.fulfill({status:404,contentType:'application/json',body:JSON.stringify({error:'Room not found'})});});
+ try{await p.goto(url);await p.waitForFunction(()=>window.__gungeon?.ready());await p.locator('#create').click();await expect.poll(()=>attempts.length).toBe(1);expect(attempts[0]).toEqual({create:true});
+ }finally{await context.close();}
 });
 test('narrow mobile supports simultaneous move and aim/fire, roll and safe release',async({browser})=>{
  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});const p=await context.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));

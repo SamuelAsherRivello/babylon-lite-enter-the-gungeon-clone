@@ -73,7 +73,7 @@
 
 ## How To Play
 
-Create a private room and share its four-character code or invite link. Friends can open the link to join automatically. Choose a pulse pistol, scatter gun or burst carbine, then ready up. Everyone currently in the lobby must be ready; a solo player can start immediately. Friends can hot join or leave during a run. Enemy counts and difficulty scale with the connected crew.
+Create a private room and share its four-character letter-and-number code or invite link. Codes use A–Z and 0–9; friends can open a valid link to join automatically. Choose a pulse pistol, scatter gun or burst carbine, then ready up. Everyone currently in the lobby must be ready; a solo player can start immediately. Friends can hot join or leave during a run. Enemy counts and difficulty scale with the connected crew.
 
 | Control | Action |
 |---|---|
@@ -114,7 +114,7 @@ See [verification evidence](bomberman-clone/documentation/verification.md) for t
 
 ## Multiplayer and hosting
 
-The [Colyseus backend v0.7.0](https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server/releases/tag/v0.7.0) is authoritative for validated movement, shooting, roll, enemy AI, spawning, damage, loot, revive, upgrades, waves and replay. The exact shared-client release tarball is pinned in the lockfile. Browser clients interpolate visual movement and send bounded inputs; they never decide health, positions or damage.
+The [Colyseus backend v0.9.7](https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server/releases/tag/v0.9.7) is authoritative for validated movement, shooting, roll, enemy AI, spawning, damage, loot, revive, upgrades, waves and replay. The exact shared-client release tarball is pinned in the lockfile. Browser clients interpolate visual movement and send bounded inputs; they never decide health, positions or damage.
 
 Rooms have four seats. A fifth player sees a full-room message and can retry. Disconnect removes that participant; automatic retry joins the same code with a fresh identity and starting gear while the room survives. Last departure disposes the room. Expired codes offer creation of a new room.
 
