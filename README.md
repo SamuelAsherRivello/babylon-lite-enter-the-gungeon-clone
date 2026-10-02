@@ -12,7 +12,7 @@
 
 ## Play
 
-Create a private room and share its six-character code or invite link. Choose a pulse pistol, scatter gun or burst carbine, then ready up. Everyone currently in the lobby must be ready; a solo player can start immediately. Friends can hot join or leave during a run. Enemy counts and difficulty scale with the connected crew.
+Create a private room and share its four-character code or invite link. Friends can open the link to join automatically. Choose a pulse pistol, scatter gun or burst carbine, then ready up. Everyone currently in the lobby must be ready; a solo player can start immediately. Friends can hot join or leave during a run. Enemy counts and difficulty scale with the connected crew.
 
 | Control | Action |
 |---|---|
@@ -39,7 +39,7 @@ npm run build
 npm run dev
 ```
 
-Open the URL printed by Vite, ending in `/babylon-lite-enter-the-gungeon-clone/`. By default this local frontend joins the public backend. For an independent local server, run the [shared server](https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server) and set `VITE_SERVER_URL=http://127.0.0.1:2567` in an untracked `.env` file; `.env.example` documents the public setting.
+Open the URL printed by Vite, ending in `/babylon-lite-enter-the-gungeon-clone/`. By default this local frontend joins the public backend. Set `VITE_MULTIPLAYER_URL` to a different server URL; `VITE_SERVER_URL` remains a compatible alias. For an independent local server, run the [shared server](https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server) and set `VITE_MULTIPLAYER_URL=http://127.0.0.1:2567` in an untracked `.env` file; `.env.example` documents the public setting.
 
 Browser verification uses installed Microsoft Edge and two separate browser contexts:
 

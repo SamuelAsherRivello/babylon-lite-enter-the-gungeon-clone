@@ -6,16 +6,16 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test project-name/test/game.test.mjs",
+    "test": "node --test project-name/test/game.test.mjs project-name/test/private-room-links.test.mjs",
     "test:browser": "playwright test",
     "test:run": "node project-name/test/playthrough.mjs"
   },
   "dependencies": {
     "@babylonjs/lite": "1.25.0",
-    "@rmc/multiplayer-client": "https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server/releases/download/v0.7.0/rmc-multiplayer-client-0.7.0.tgz"
+    "@rmc/multiplayer-client": "https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server/releases/download/v0.9.7/rmc-multiplayer-client-0.9.7.tgz"
   },
   "devDependencies": {
-    "vite": "^8.3.0",
-    "@playwright/test": "^1.63.0"
+    "@playwright/test": "^1.63.0",
+    "vite": "^8.3.0"
   }
 }
