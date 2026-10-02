@@ -4,13 +4,74 @@
 
 **Brass & Brimstone** is an original landscape pixel dungeon for **1–4 online cooperative players**. Play solo or invite a crew by room code. Dodge bright bullet patterns, clear waves, pick weapon upgrades and revive fallen teammates. A clockwork Warden arrives every fifth wave; the run ends when the entire crew is down.
 
+
+## Original AI Prompt
+
+<!-- AI: Populate with the the earliest substantive user prompt that started this project. Replace the placeholder within the <details> below with the original prompt text. -->
+
+<details>
+<summary>Read the full original prompt</summary>
+
+```text
+
+ 
+- Title: [Enter the Gungeon Clone]
+- Type: [Multiplayer, online cooperative, 2–4 players. All human players cooperate on the same team.]
+- World and camera:
+  - [Create one 2D level approximately twice the viewport width and twice its height, giving it about four times the area of one screen.]
+  - [The level may be tile-based or use freely placed artwork and geometry.]
+  - [Use a top-down orthographic camera that smoothly follows the local player and stays within the level boundaries.]
+- Core loop: [Cooperate to survive increasingly difficult enemy waves, dodge bullet patterns, collect loot, and choose weapon upgrades between waves. Defeat a boss every five waves. The run ends when the entire team is down.]
+- Controls: [WASD movement, mouse aiming, left-click shooting, and Space to dodge roll with a short cooldown and brief invulnerability.]
+- Cooperative mechanics:
+  - [Create or join a room using a shareable room code, then ready up together.]
+  - [Revive downed teammates, share upgrade rewards, and disable friendly fire.]
+  - [Scale enemy counts and difficulty with the number of active players.]
+  - [Show directional indicators for teammates outside the local camera view.]
+- Look and feel:
+  - [Original pixel-art dungeon scenery with stone floors, destructible props, and readable cover.]
+  - [Distinct player colors, expressive enemies, bright projectiles, punchy muzzle flashes, and clear hit feedback.]
+  - [Keep enemy bullets visually distinct from friendly shots. Show player health, teammate status, current wave, remaining enemies, and dodge cooldown.]
+- Gameplay requirements:
+  - [Include three starting weapons with distinct firing patterns and meaningful upgrades.]
+  - [Include enemies that chase, fire aimed shots, and emit radial bullet patterns.]
+  - [Provide short breaks between waves for upgrades and a team restart option after defeat.]
+- Multiplayer server and smoothness:
+  - [Use https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server or my writable fork: <fork URL, if applicable>.]
+  - [Automatically update the selected server repository with the room logic and synchronized state required by this game.]
+  - [Make the server authoritative for movement validation, combat, enemy spawning, damage, loot, revives, and wave progression.]
+  - [Use supported Colyseus prediction features where available, or implement suitable client-side prediction, server reconciliation, and interpolation.]
+  - [Respond immediately to local movement and dodge inputs. Smooth reconciliation corrections and drive the camera from the predicted local character position to avoid visible jitter.]
+  - [Interpolate remote players and enemies. Use immediate local animations, muzzle flashes, and cosmetic effects while reconciling gameplay outcomes with the server.]
+  - [Use deterministic projectile motion or other bandwidth-efficient synchronization where appropriate.]
+  - [Prioritize a smooth, consistent experience for every player over action density. If synchronization struggles, reduce concurrent bullets, enemies, spawn rates, and firing rates.]
+  - [Handle disconnects and reconnects gracefully.]
+  - [Verify with at least two browser clients, including simulated latency and jitter. Check responsive local movement, stable camera tracking, smooth remote motion, and consistent combat outcomes.]
+- Inspiration links:
+  - [https://store.steampowered.com/app/311690/Enter_the_Gungeon/]
+- Inspiration screenshots: [Attach reference screenshots here.]
+- Originality requirement: [Keep the requested project title, but create original artwork, sounds, characters, weapons, UI, and level layouts; use the reference only for gameplay and visual inspiration.]
+
+```
+
+</details>
+
+
 ## Live Demo
 
-[**Play Enter the Gungeon Clone →**](https://samuelasherrivello.github.io/babylon-lite-enter-the-gungeon-clone/)
+<!-- AI: Keep exactly one bullet containing the demo link and no other visible text. Do not mention releases or add other text here. Keep this one link updated to the latest release URL. -->
+
+- [**Play Enter the Gungeon Clone**](https://samuelasherrivello.github.io/babylon-lite-enter-the-gungeon-clone/)
+
+
+## Images
+
+<!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
 
 ![Two players in the Copper Keep](project-name/documentation/screenshot01.png)
 
-## Play
+
+## How To Play
 
 Create a private room and share its four-character code or invite link. Friends can open the link to join automatically. Choose a pulse pistol, scatter gun or burst carbine, then ready up. Everyone currently in the lobby must be ready; a solo player can start immediately. Friends can hot join or leave during a run. Enemy counts and difficulty scale with the connected crew.
 
@@ -64,52 +125,6 @@ The existing Vercel service keeps rooms in memory and has approximately five-min
 Source, original procedural sprites, sounds and tests live in `project-name/`; root package files manage Vite and the release. Babylon Lite renders the pixel surface through its orthographic WebGPU sprite pipeline. [Asset provenance and source revisions](project-name/documentation/provenance.md) record the template, library, backend and original art.
 
 `version.txt` is the frontend version source. The checked-in **Release** workflow installs, tests and builds, then increments the patch version, commits, tags and publishes a GitHub Release. Explicitly dispatch **Deploy live demo** afterward because a workflow bot's push does not trigger another push workflow. Verify the public version, assets and two-client gameplay before announcing delivery.
-
-## Original AI Prompt
-
-<details>
-<summary>Read the original game request and follow-up requirements</summary>
-
-```text
-$ai-skills-create-game
-
-- Title: [Enter the Gungeon Clone]
-- Type: [Multiplayer, online cooperative, 2–4 players]
-- Camera: [Top-down orthographic 2D]
-- Core loop: [Team up in compact dungeon arenas, survive increasingly difficult enemy waves, dodge bullet patterns, collect loot, and choose weapon upgrades between waves. Defeat a boss every five waves. The run ends when the entire team is down.]
-- Controls: [WASD movement, mouse aiming, left-click shooting, and Space to dodge roll with a short cooldown and brief invulnerability.]
-- Cooperative mechanics:
-  - [Create or join a room using a shareable room code, then ready up together.]
-  - [Revive downed teammates, share upgrade rewards, and disable friendly fire.]
-  - [Scale enemy counts and difficulty with the number of active players.]
-- Look and feel:
-  - [Original pixel-art dungeon rooms with stone floors, destructible props, and readable cover.]
-  - [Distinct player colors, expressive enemies, bright projectiles, punchy muzzle flashes, and clear hit feedback.]
-  - [Keep enemy bullets visually distinct from friendly shots. Show player health, teammate status, current wave, remaining enemies, and dodge cooldown.]
-- Gameplay requirements:
-  - [Include three starting weapons with distinct firing patterns and meaningful upgrades.]
-  - [Include enemies that chase, fire aimed shots, and emit radial bullet patterns.]
-  - [Provide short breaks between waves for upgrades and a team restart option after defeat.]
-- Multiplayer server:
-  - [Use https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server or my writable fork: <fork URL, if applicable>.]
-  - [Automatically update the selected server repository with the room logic and synchronized state required by this game.]
-  - [Make the server authoritative for movement validation, combat, enemy spawning, damage, loot, revives, and wave progression.]
-  - [Use client interpolation for smooth remote movement and handle disconnects and reconnects gracefully.]
-  - [Verify cooperative gameplay with at least two browser clients.]
-- Inspiration links:
-  - [https://store.steampowered.com/app/311690/Enter_the_Gungeon/]
-- Inspiration screenshots: [Attach reference screenshots here.]
-- Originality requirement: [Keep the requested project title, but create original artwork, sounds, characters, weapons, UI, and room layouts; use the reference only for gameplay and visual inspiration.]
-
-Follow-ups:
-say '1-4' players so that it is playable alone too and has hot join hot drop
-ok now make the landscape aspect game
-iterate until its done and playaable via live demo on link on readme as a multiplayer game
-create the game. iterate until complete
-approved. deploy
-```
-
-</details>
 
 ## Credits
 
