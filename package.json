@@ -6,9 +6,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test project-name/test/game.test.mjs project-name/test/private-room-links.test.mjs",
+    "test": "node --test bomberman-clone/test/game.test.mjs bomberman-clone/test/private-room-links.test.mjs",
     "test:browser": "playwright test",
-    "test:run": "node project-name/test/playthrough.mjs"
+    "test:run": "node bomberman-clone/test/playthrough.mjs"
   },
   "dependencies": {
     "@babylonjs/lite": "1.25.0",

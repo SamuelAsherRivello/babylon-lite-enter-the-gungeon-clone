@@ -10,12 +10,12 @@ try{
  let lastWave=0,sawBreak=false,sawBoss=false,success=false,revived=false,downId=null;const begin=Date.now();
  while(Date.now()-begin<220000){const states=await Promise.all(controllers.map(async c=>({c,s:await c.p.evaluate(()=>window.__gungeon.state())})));
   const g=states[0].s.gameState;if(!g){console.log('lost state');break;}if(g.wave!==lastWave){console.log('WAVE',g.wave,'HP',g.players.map(p=>p.hp));lastWave=g.wave;}
-  if(g.enemies.some(e=>e.kind==='boss')&&!sawBoss){sawBoss=true;console.log('BOSS SEEN');await a.p.screenshot({path:'project-name/documentation/boss.png',fullPage:true});}
+  if(g.enemies.some(e=>e.kind==='boss')&&!sawBoss){sawBoss=true;console.log('BOSS SEEN');await a.p.screenshot({path:'bomberman-clone/documentation/boss.png',fullPage:true});}
   if(downId&&g.players.some(p=>p.id===downId&&p.hp>0)){revived=true;console.log('REVIVED');downId=null;}const down=g.players.find(p=>p.hp<=0);if(down)downId=down.id;
-  if(g.phase==='defeat'){console.log('DEFEAT',g.wave);await a.p.screenshot({path:'project-name/documentation/defeat.png',fullPage:true});break;}
+  if(g.phase==='defeat'){console.log('DEFEAT',g.wave);await a.p.screenshot({path:'bomberman-clone/documentation/defeat.png',fullPage:true});break;}
   if(g.wave>=5&&g.phase==='break'){success=true;break;}
   for(let index=0;index<states.length;index++){const {c,s}=states[index],me=s.gameState?.players.find(p=>p.id===s.sessionId);if(!me||me.hp<=0){await c.fire(false);await c.move(0,0);continue;}
-   if(g.phase==='break'){await c.fire(false);await c.move(0,0);if(me.credits>0){const choice=me.hp<me.maxHp-20||g.wave===4?'vitality':'damage';await c.p.locator(`[data-upgrade=${choice}]`).click();sawBreak=true;console.log('UPGRADE',index,choice,me.damage);if(index===0)await c.p.screenshot({path:'project-name/documentation/upgrades.png',fullPage:true});}continue;}
+   if(g.phase==='break'){await c.fire(false);await c.move(0,0);if(me.credits>0){const choice=me.hp<me.maxHp-20||g.wave===4?'vitality':'damage';await c.p.locator(`[data-upgrade=${choice}]`).click();sawBreak=true;console.log('UPGRADE',index,choice,me.damage);if(index===0)await c.p.screenshot({path:'bomberman-clone/documentation/upgrades.png',fullPage:true});}continue;}
    let tx,ty;if(down){tx=down.x;ty=down.y;}else{const theta=g.time*.7+index*Math.PI;tx=15+5*Math.cos(theta);ty=9+4*Math.sin(theta);}
    let dx=tx-me.x,dy=ty-me.y;const n=Math.max(1,Math.hypot(dx,dy));dx/=n;dy/=n;
    if(!down)for(const bullet of g.shots.filter(s=>s.enemy)){const bx=me.x-bullet.x,by=me.y-bullet.y,d=Math.hypot(bx,by);if(d<1.5){dx+=bx/Math.max(.1,d)*1.3;dy+=by/Math.max(.1,d)*1.3;}}

@@ -1,4 +1,4 @@
-![Samuel Asher Rivello](project-name/documentation/samuel-asher-rivello-banner.png)
+![Samuel Asher Rivello](bomberman-clone/documentation/samuel-asher-rivello-banner.png)
 
 # Enter the Gungeon Clone
 
@@ -68,7 +68,7 @@
 
 <!-- AI: Do not add more than one sentence of introductory text at the top of this section. -->
 
-![Two players in the Copper Keep](project-name/documentation/screenshot01.png)
+![Two players in the Copper Keep](bomberman-clone/documentation/screenshot01.png)
 
 
 ## How To Play
@@ -110,7 +110,7 @@ npm run test:browser
 
 For the longer two-browser playthrough through upgrades and defeating the fifth-wave boss, run `npm run test:run`. It drives normal keyboard/mouse controls and reads snapshots; it does not alter game rules or grant health.
 
-See [verification evidence](project-name/documentation/verification.md) for the exact tested scope and physical-device limits.
+See [verification evidence](bomberman-clone/documentation/verification.md) for the exact tested scope and physical-device limits.
 
 ## Multiplayer and hosting
 
@@ -122,7 +122,7 @@ The existing Vercel service keeps rooms in memory and has approximately five-min
 
 ## Project and releases
 
-Source, original procedural sprites, sounds and tests live in `project-name/`; root package files manage Vite and the release. Babylon Lite renders the pixel surface through its orthographic WebGPU sprite pipeline. [Asset provenance and source revisions](project-name/documentation/provenance.md) record the template, library, backend and original art.
+Source, original procedural sprites, sounds and tests live in `bomberman-clone/`; root package files manage Vite and the release. Babylon Lite renders the pixel surface through its orthographic WebGPU sprite pipeline. [Asset provenance and source revisions](bomberman-clone/documentation/provenance.md) record the template, library, backend and original art.
 
 `version.txt` is the frontend version source. The checked-in **Release** workflow installs, tests and builds, then increments the patch version, commits, tags and publishes a GitHub Release. Explicitly dispatch **Deploy live demo** afterward because a workflow bot's push does not trigger another push workflow. Verify the public version, assets and two-client gameplay before announcing delivery.
 

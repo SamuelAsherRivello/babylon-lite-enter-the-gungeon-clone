@@ -6,7 +6,7 @@ const repositoryRoot = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   base: "/babylon-lite-enter-the-gungeon-clone/",
-  root: "project-name",
+  root: "bomberman-clone",
   server: {
     fs: {
       allow: [repositoryRoot],

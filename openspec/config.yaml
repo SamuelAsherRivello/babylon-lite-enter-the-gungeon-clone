@@ -7,7 +7,7 @@ context: |
   Browser never owns health, movement outcomes or combat; no credentials.
   GitHub Pages static frontend; Vercel in-memory backend with session limits.
   Verification: npm test, npm run build, npm run test:browser, public two-client play.
-  Canonical project documentation assets live in project-name/documentation/.
+  Canonical project documentation assets live in bomberman-clone/documentation/.
 rules:
   proposal:
     - Mark unresolved decisions clearly; recommendations are not approvals.

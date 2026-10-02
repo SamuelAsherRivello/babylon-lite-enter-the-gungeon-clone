@@ -5,7 +5,7 @@ The game uses the requested template-generation flow with independent GitHub his
 Deliberate adaptations to the older template checklist:
 
 - GitHub template generation replaces its manual-copy/empty-repository instructions, as required by the invoked creation skill. GitHub's generated initial commit is named `Initial commit`; no history rewrite was performed to change capitalization.
-- `project-name/` remains the internal application directory to preserve the established layout and workflow paths; this is documented in the design and README. Product-facing placeholders are replaced.
+- The application directory is `bomberman-clone/`, renamed from the template's `project-name/` at the user's request. Vite, test scripts, screenshot paths, documentation links, and Pages packaging point to it.
 - React is replaced by plain JavaScript because the game needs the lightweight Babylon Lite renderer and direct input handling. Corner UI roles are preserved.
 - Repository-local OpenSpec skills are generated/refreshed with 1.13.1 and read directly; CLI doctor is healthy. Reopening the app solely to inspect autocomplete is an advisory UI step and was not needed to execute the verified workflow.
 - Release/deployment were explicitly authorized. Source-controlled version.txt and existing patch workflow are preserved. The release workflow now installs dependencies, tests and builds before bumping.

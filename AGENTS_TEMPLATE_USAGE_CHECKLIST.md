@@ -1,6 +1,6 @@
 # AI Template Usage Checklist
 
-> Completed for Enter the Gungeon Clone. Applied adaptations (GitHub template generation, retained application directory, direct skill verification) are documented in [the delivery record](project-name/documentation/template-delivery.md). Public gameplay and releases are verified in [verification evidence](project-name/documentation/verification.md). Checklist cleanup was offered; the file is retained by default.
+> Completed for Enter the Gungeon Clone. Applied adaptations (GitHub template generation, application directory renamed to `bomberman-clone/` on request, direct skill verification) are documented in [the delivery record](bomberman-clone/documentation/template-delivery.md). Public gameplay and releases are verified in [verification evidence](bomberman-clone/documentation/verification.md). Checklist cleanup was offered; the file is retained by default.
 
 > Repository creation workflow: When the user provides a Git URL, treat that repository as an inspiration/source repository. Do not clone it as the working project and do not preserve its history. Create a brand-new repository whose name matches the project name, copy the files from the inspiration repository's current `HEAD` into the new repository, and make exactly one commit named `Initial Commit`. At the end of this checklist, the local project must be a checkout of the new repository with that new repository configured as `origin`; do not publish project-specific work to the template or inspiration repository.
 
@@ -35,11 +35,11 @@ Node/npm/Vite baseline that may be retained or replaced deliberately.
       `git log -1 --format=%B` must return
       `Initial Commit`. Confirm `origin` points to the new project repository
       before continuing with project-specific changes.
-- [x] Rename `project-name/`, update the Vite `root` setting, and replace every
-      `{project-name}`, `{github-owner}`, and `{repository-name}` placeholder
+- [x] Rename `project-name/` to `bomberman-clone/`, update the Vite `root`
+      setting, and replace every `{project-name}`, `{github-owner}`, and `{repository-name}` placeholder
       with confirmed project metadata before adding project-specific
       implementation.
-- [x] Rename the README H1 (`# {project-name}`) to the confirmed project name.
+- [x] Rename the README H1 (`# {bomberman-clone}`) to the confirmed project name.
 - [x] Replace the README introduction placeholder (`This is the project
       repo....`) with a concise summary from implemented behavior.
 - [x] Set the new GitHub repository's About description to a concise summary
@@ -73,7 +73,7 @@ Node/npm/Vite baseline that may be retained or replaced deliberately.
 - [x] Record actual setup, run, test, build, and formatting commands in the
       README.
 - [x] Update `.gitignore` for generated outputs, local state, and secrets; keep
-      the baseline `node_modules/` and `project-name/dist/` exclusions if
+      the baseline `node_modules/` and `bomberman-clone/dist/` exclusions if
       Node/Vite remains.
 - [x] Add a safe `.env.example` only if the project requires configuration; it
       must contain no real credentials.
