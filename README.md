@@ -70,14 +70,8 @@
 
 ![Two players in the Copper Keep](project-name/documentation/screenshot01.png)
 
---------------
-## Live Demo
 
-
-
-
-
-## Play
+## How To Play
 
 Create a private room and share its six-character code or invite link. Choose a pulse pistol, scatter gun or burst carbine, then ready up. Everyone currently in the lobby must be ready; a solo player can start immediately. Friends can hot join or leave during a run. Enemy counts and difficulty scale with the connected crew.
 
