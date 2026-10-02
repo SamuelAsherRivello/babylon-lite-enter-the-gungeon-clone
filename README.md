@@ -4,11 +4,57 @@
 
 **Brass & Brimstone** is an original landscape pixel dungeon for **1–4 online cooperative players**. Play solo or invite a crew by room code. Dodge bright bullet patterns, clear waves, pick weapon upgrades and revive fallen teammates. A clockwork Warden arrives every fifth wave; the run ends when the entire crew is down.
 
+
 ## Original AI Prompt
 
-<!-- AI: Link the earliest substantive user prompt that kicked off this project, usually the prompt that invoked a project-creation skill. Use the prompt's source URL as both the link text and destination. -->
+<!-- AI: Populate with the the earliest substantive user prompt that started this project. Replace the placeholder within the <details> below with the original prompt text. -->
 
-[{original-ai-prompt-url}]({original-ai-prompt-url})
+<details>
+<summary>Read the full original prompt</summary>
+
+```text
+
+ 
+- Title: [Enter the Gungeon Clone]
+- Type: [Multiplayer, online cooperative, 2–4 players. All human players cooperate on the same team.]
+- World and camera:
+  - [Create one 2D level approximately twice the viewport width and twice its height, giving it about four times the area of one screen.]
+  - [The level may be tile-based or use freely placed artwork and geometry.]
+  - [Use a top-down orthographic camera that smoothly follows the local player and stays within the level boundaries.]
+- Core loop: [Cooperate to survive increasingly difficult enemy waves, dodge bullet patterns, collect loot, and choose weapon upgrades between waves. Defeat a boss every five waves. The run ends when the entire team is down.]
+- Controls: [WASD movement, mouse aiming, left-click shooting, and Space to dodge roll with a short cooldown and brief invulnerability.]
+- Cooperative mechanics:
+  - [Create or join a room using a shareable room code, then ready up together.]
+  - [Revive downed teammates, share upgrade rewards, and disable friendly fire.]
+  - [Scale enemy counts and difficulty with the number of active players.]
+  - [Show directional indicators for teammates outside the local camera view.]
+- Look and feel:
+  - [Original pixel-art dungeon scenery with stone floors, destructible props, and readable cover.]
+  - [Distinct player colors, expressive enemies, bright projectiles, punchy muzzle flashes, and clear hit feedback.]
+  - [Keep enemy bullets visually distinct from friendly shots. Show player health, teammate status, current wave, remaining enemies, and dodge cooldown.]
+- Gameplay requirements:
+  - [Include three starting weapons with distinct firing patterns and meaningful upgrades.]
+  - [Include enemies that chase, fire aimed shots, and emit radial bullet patterns.]
+  - [Provide short breaks between waves for upgrades and a team restart option after defeat.]
+- Multiplayer server and smoothness:
+  - [Use https://github.com/SamuelAsherRivello/rmc-colyseus-multiplayer-server or my writable fork: <fork URL, if applicable>.]
+  - [Automatically update the selected server repository with the room logic and synchronized state required by this game.]
+  - [Make the server authoritative for movement validation, combat, enemy spawning, damage, loot, revives, and wave progression.]
+  - [Use supported Colyseus prediction features where available, or implement suitable client-side prediction, server reconciliation, and interpolation.]
+  - [Respond immediately to local movement and dodge inputs. Smooth reconciliation corrections and drive the camera from the predicted local character position to avoid visible jitter.]
+  - [Interpolate remote players and enemies. Use immediate local animations, muzzle flashes, and cosmetic effects while reconciling gameplay outcomes with the server.]
+  - [Use deterministic projectile motion or other bandwidth-efficient synchronization where appropriate.]
+  - [Prioritize a smooth, consistent experience for every player over action density. If synchronization struggles, reduce concurrent bullets, enemies, spawn rates, and firing rates.]
+  - [Handle disconnects and reconnects gracefully.]
+  - [Verify with at least two browser clients, including simulated latency and jitter. Check responsive local movement, stable camera tracking, smooth remote motion, and consistent combat outcomes.]
+- Inspiration links:
+  - [https://store.steampowered.com/app/311690/Enter_the_Gungeon/]
+- Inspiration screenshots: [Attach reference screenshots here.]
+- Originality requirement: [Keep the requested project title, but create original artwork, sounds, characters, weapons, UI, and level layouts; use the reference only for gameplay and visual inspiration.]
+
+```
+
+</details>
 
 
 ## Live Demo
