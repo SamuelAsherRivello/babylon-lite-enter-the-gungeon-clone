@@ -13,8 +13,8 @@
 <summary>Read the full original prompt</summary>
 
 ```text
+$ai-skills-create-game
 
- 
 - Title: [Enter the Gungeon Clone]
 - Type: [Multiplayer, online cooperative, 2–4 players. All human players cooperate on the same team.]
 - World and camera:
